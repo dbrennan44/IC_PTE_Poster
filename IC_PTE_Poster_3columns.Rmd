@@ -1,0 +1,84 @@
+---
+title: Spatial Distribution of Traumatic Brain Injury Contusions and Post-Traumatic Epilepsy
+author:
+  - name: Daniel Brennan
+    affil: 1
+  - name: Andrea L.C. Schneider
+    affil: 1
+  - name: Jim Gugger
+    affil: 2
+
+affiliation:
+  - num: 1
+    address: University of Pennsylvania Department of Neurology, Philadelphia PA, United States
+  - num: 2
+    address: University of Rochester Department of Neurology, Rochester NY, United States
+
+affiliation_textsize: 25
+column_numbers: 3
+
+primary_colour: "#011F5B"
+secondary_colour: "#FFFFFF"
+main_textcol: "#FFFFFF"
+body_textcol: "#000000"
+affiliation_textcol: "#FFFFFF"
+title_height_ratio: 0.175
+
+output:
+  posterdown::posterdown_html:
+    self_contained: false
+bibliography: packages.bib
+---
+
+```{r setup, include=FALSE}
+library(ggplot2)
+
+knitr::opts_chunk$set(
+  echo = FALSE,
+  warning = FALSE,
+  message = FALSE,
+  fig.align = "center",
+  out.width = "100%"
+)
+```
+
+# Background
+
+* Placeholder: introduce the clinical importance of post-traumatic epilepsy after traumatic brain injury.
+* Placeholder: summarize why contusion location, cortical involvement, or lesion burden may influence epileptogenesis.
+* Placeholder: note the gap in understanding the spatial distribution of contusions associated with later epilepsy.
+
+Objective: To characterize the spatial distribution of traumatic brain injury contusions and evaluate their relationship with post-traumatic epilepsy.
+
+# Methods
+
+* Placeholder: describe the study cohort, inclusion criteria, and imaging timepoint(s).
+* Placeholder: define how contusions were identified or segmented and how lesion maps were registered to common space.
+* Placeholder: define post-traumatic epilepsy and specify follow-up or case ascertainment procedures.
+* Placeholder: describe the primary spatial comparison between participants with and without post-traumatic epilepsy.
+* Placeholder: add any covariate adjustment, regional summary approach, and multiple-comparison correction if used.
+
+# Results {.mybreak}
+
+<div style="height: 1500px;"></div>
+
+# Results Continued {.mybreak}
+
+* Placeholder: report the overall contusion distribution across the cohort.
+* Placeholder: describe the principal spatial differences between participants with and without post-traumatic epilepsy.
+* Placeholder: insert the main quantitative finding, such as an odds ratio, regional effect estimate, or posterior contrast.
+* Placeholder: note whether findings persisted after adjustment for overall lesion burden, severity, or demographic covariates.
+* Placeholder: add one sentence for secondary or sensitivity analyses.
+
+Suggested written-results sequence:
+
+1. Cohort-level lesion distribution.
+2. PTE versus non-PTE spatial contrast.
+3. Main quantitative estimate.
+4. Sensitivity or secondary findings.
+
+# Conclusions
+
+* Placeholder: summarize the main take-home message about contusion topography and post-traumatic epilepsy.
+* Placeholder: state the clinical implication for risk stratification or follow-up planning.
+* Placeholder: note the next step for validation, external replication, or longitudinal modeling.

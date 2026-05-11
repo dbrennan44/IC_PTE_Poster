@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<!--
+Font-awesome icons ie github or twitter
+-->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/brands.css" integrity="sha384-n9+6/aSqa9lBidZMRCQHTHKJscPq6NW4pCQBiMmHdUCvPN8ZOg2zJJTkC7WIezWv" crossorigin="anonymous">
+
+<!--
+Google fonts api stuff
+-->
+
+
+
+<title>Spatial Distribution of Traumatic Brain Injury Contusions and Post-Traumatic Epilepsy</title>
+
+
+
+
+
+
+<style>
+@page {
+size: 45in 38in;
+margin: 0;
+padding: 0;
+}
+body {
+margin: 0;
+font-size: 45px;
+width: 45in;
+height: 38in;
+padding: 0;
+text-align: justify;
+font-family: Palatino;
+}
+.poster_wrap {
+width: 45in;
+height: 38in;
+padding: 0cm;
+}
+.title_container {
+width: 45in;
+height: calc(38in * 0.175); /* change proportion of top banner */ 
+overflow: hidden;
+background-color: #011F5B;
+border: 0 solid #FFFFFF;
+}
+.logo_left {
+float: left;
+width: 10%;
+height: 100%;
+background-color: #011F5B;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.logo_right {
+float: right;
+width: 10%;
+height: 100%;
+background-color: #011F5B;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.poster_title {
+text-align: center;
+position: relative;
+float: left;
+width: 80%;
+height: 100%;
+color: #FFFFFF;
+top: 50%;
+transform: translateY(-50%);
+-webkit-transform: translateY(-50%);
+}
+#title {
+font-family: Palatino;
+}
+
+
+
+
+
+
+/* unvisited link */
+a:link {
+color: #cc0000;
+}
+.mybreak {
+  break-before: column;
+}
+/* visited link */
+a:visited {
+color: #cc0000;
+}
+
+/* mouse over link */
+a:hover {
+color: #cc0000;
+}
+
+/* selected link */
+a:active {
+color: #cc0000;
+}
+.poster_body {
+-webkit-column-count: 3; /* Chrome, Safari, Opera */
+-moz-column-count: 3; /* Firefox */
+column-count: 3;
+-webkit-column-fill: auto;
+-moz-column-fill: auto;
+column-fill: auto;
+-webkit-column-rule-width: 1mm;
+-moz-column-rule-width: 1mm;
+column-rule-width: 1mm;
+-webkit-column-rule-style: dashed;
+-moz-column-rule-style: dashed;
+column-rule-style: dashed;
+-webkit-column-rule-color: #011F5B;
+-moz-column-rule-color: #011F5B;
+column-rule-color: #011F5B;
+column-gap: 1em;
+padding-left: 0.5em;
+padding-right: 0.5em;
+height: 100%;
+color: #000000
+background-color: #ffffff;
+}
+.poster_title h1 {
+font-size: 75pt;
+margin: 0;
+border: 0;
+font-weight: normal;
+}
+.poster_body_wrap{
+width: calc(45in + 0 + 0);
+height: calc(38in * 0.83);
+padding-top: calc(38in * 0.005);
+padding-bottom: calc(38in * 0.01);
+background-color: #ffffff;
+}
+.poster_title h3 {
+color: #FFFFFF;
+font-size: 50pt;
+margin: 0;
+border: 0;
+font-weight: normal;
+}
+.poster_title h3 > sup {
+  font-size: 35pt;
+  margin-left: 0.02em;
+}
+.poster_title h5 {
+color: #FFFFFF;
+font-size: ;
+margin: 0;
+border: 0;
+font-weight: normal;
+}
+
+
+
+
+
+
+
+
+
+img {
+margin-top: 1cm;
+margin-bottom: 0;
+}
+.section {
+  padding: 0.2em;
+}
+.poster_body h1 {
+text-align: center;
+color: #FFFFFF;
+font-size: 65pt;
+border: 2mm solid #011F5B;
+background-color: #011F5B;
+border-radius: 4mm 0mm;
+margin-top: 2mm;
+margin-bottom: 2mm;
+font-weight: normal;
+}
+.poster_body h2 {
+color: #000000;
+font-size: 40pt;
+padding-left: 4mm;
+font-weight: normal;
+}
+.span {
+width: 200%;
+}
+/* center align leaflet map,
+from https://stackoverflow.com/questions/52112119/center-leaflet-in-a-rmarkdown-document */
+.html-widget {
+margin: auto;
+position: sticky;
+margin-top: 2cm;
+margin-bottom: 2cm;
+}
+.leaflet.html-widget.html-widget-static-bound.leaflet-container.leaflet-touch.leaflet-fade-anim.leaflet-grab.leaflet-touch-drag.leaflet-touch-zoom {
+position: sticky;
+width: 100%;
+}
+pre.sourceCode.r {
+background-color: #dddddd40;
+border-radius: 4mm;
+padding: 4mm;
+width: 75%;
+/* align-items: center; */
+margin: auto;
+padding-left: 2cm;
+}
+code.sourceCode.r{
+background-color: transparent;
+font-size: 20pt;
+border-radius: 2mm;
+}
+.caption {
+font-size: 25pt;
+}
+.table caption {
+font-size: 25pt;
+padding-bottom: 3mm;
+
+}
+code {
+font-size: 1em;
+font-family: monospace;
+background-color: #FFFFFF24;
+color: #011F5B;
+padding: 1.2mm;
+border-radius: 2mm;
+}
+.poster_title code {
+font-size: 1em;
+}
+table {
+font-size: 40px;
+margin: auto;
+border-top: 3px solid #666;
+border-bottom: 3px solid #666;
+}
+table thead th {
+border-bottom: 3px solid #ddd;
+}
+td {
+padding: 8px;
+}
+th {
+padding: 15px;
+}
+caption {
+margin-bottom: 10px;
+}
+.poster_body p {
+margin-right: 4mm;
+margin-left: 4mm;
+margin-top: 6mm;
+margin-bottom: 10mm;
+}
+.poster_body ol {
+margin-right: 4mm;
+margin-left: 4mm;
+}
+#ul {
+margin-right: 4mm;
+margin-left: 4mm;
+}
+.references p {
+font-size: 20pt;
+}
+.orcid img {
+  width: 1em;
+}
+</style>
+</head>
+<body>
+
+
+<div class="poster_wrap">
+<div class="title_container">
+<!-- Left Logo  -->
+<div class="logo_left">
+</div>
+<!-- Poster Title -->
+<div class= "poster_title">
+<h1 id="title">Spatial Distribution of Traumatic Brain Injury Contusions<br>and Post-Traumatic Epilepsy</h1>
+<h3 id="author">Daniel Brennan PhD<sup>1</sup>, Andrea L.C. Schneider MD PhD<sup>1</sup>, James J. Gugger MD PharmD<sup>2</sup></h3><br>
+<h5 id="affiliation"><sup>1</sup> University of Pennsylvania Department of Neurology, Philadelphia PA, United States<br> <sup>2</sup> University of Rochester Department of Neurology, Rochester NY, United States</h5>
+</div>
+<!-- Right Logo  -->
+<div class="logo_right">
+</div>
+</div>
+
+<div class='poster_body_wrap'>
+<div class='poster_body'>
+<style>
+.poster_title h3 {
+  margin-top: 0.28em !important;
+}
+
+.poster_title h5 {
+  margin-top: 0.12em !important;
+}
+
+.poster_body ul {
+  margin-top: 0.35em;
+  margin-bottom: 0.45em;
+}
+
+.poster_body ul li {
+  margin-bottom: 0.28em;
+  line-height: 1.18;
+}
+
+.poster_body ul li:last-child {
+  margin-bottom: 0;
+}
+</style>
+<div id="background" class="section level1">
+<h1>Background</h1>
+<ul>
+<li>Focal traumatic brain injury (TBI) and contusions are associated with post-traumatic epilepsy (PTE)</li>
+<li>Observed differences confounded by increased injury severity</li>
+<li>Unclear whether focal injury related beyond injury severity, which contusion characteristics (core/edema) associated</li>
+</ul>
+<p>Objective: To characterize the spatial distribution of TBI contusions in PTE</p>
+</div>
+<div id="methods" class="section level1">
+<h1>Methods</h1>
+<ul>
+<li>Transforming Research and Clinical Knowledge in TBI Epileptogenesis Project (TRACK-TBI EPI) data</li>
+<li>Manual contusions segmentation on 2-week T1/FLAIR MRI; masks warped to MNI space</li>
+<li>Disconnection mapping: extend contusion via intersection of normative white-matter tract atlas</li>
+<li>LESYMAP: multivariate contusion map analysis</li>
+<li>Cosine-similarity of stat-map &amp; contusions compared with covariates: age, sex, GCS, total-contusion-volume</li>
+</ul>
+</div>
+<div id="results" class="section level1">
+<h1>Results</h1>
+<div style="height:0.55em;">
+
+</div>
+<div style="font-size:20pt; font-weight:700; margin-top:0.20em; margin-bottom:0.42em;">
+Demographics
+</div>
+<style>
+table.apa-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-top: 2px solid #000000;
+  border-bottom: 2px solid #000000;
+  font-size: 20pt;
+  line-height: 1.15;
+  margin-top: 0.15em;
+}
+table.apa-table th,
+table.apa-table td {
+  padding: 0.36em 0.48em;
+  border-left: none;
+  border-right: none;
+}
+table.apa-table thead th {
+  border-bottom: 1.5px solid #000000;
+  font-weight: 700;
+}
+table.apa-table tbody tr:last-child td {
+  border-bottom: none;
+}
+</style>
+<table class="apa-table">
+<thead>
+<tr>
+<th style="text-align:left;">
+Characteristic
+</th>
+<th style="text-align:center;">
+non-PTE
+</th>
+<th style="text-align:center;">
+PTE
+</th>
+<th style="text-align:center;">
+Overall
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:center;">
+121
+</td>
+<td style="text-align:center;">
+14
+</td>
+<td style="text-align:center;">
+135
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Age, mean (SD)
+</td>
+<td style="text-align:center;">
+38.9 (18.4)
+</td>
+<td style="text-align:center;">
+33.7 (15.8)
+</td>
+<td style="text-align:center;">
+38.4 (18.1)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+GCSER, median [IQR]
+</td>
+<td style="text-align:center;">
+15.0 [14.0, 15.0]
+</td>
+<td style="text-align:center;">
+10.5 [3.0, 15.0]
+</td>
+<td style="text-align:center;">
+15.0 [12.0, 15.0]
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Female, n (%)
+</td>
+<td style="text-align:center;">
+30 (24.8%)
+</td>
+<td style="text-align:center;">
+4 (28.6%)
+</td>
+<td style="text-align:center;">
+34 (25.2%)
+</td>
+</tr>
+</tbody>
+</table>
+<div style="height:1.05em;">
+
+</div>
+<div style="font-size:20pt; font-weight:700; margin-top:0.18em; margin-bottom:0.42em;">
+Contusion Mapping Results
+</div>
+<table class="apa-table">
+<thead>
+<tr>
+<th style="text-align:left;">
+Contusion Characteristic
+</th>
+<th style="text-align:center;">
+PTE
+</th>
+<th style="text-align:center;">
+non-PTE
+</th>
+<th style="text-align:center;">
+LESYMAP p-value
+</th>
+<th style="text-align:center;">
+Median Difference<br>Cosine Similarity [95% CI]
+</th>
+<th style="text-align:center;">
+p-value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Core + Edema
+</td>
+<td style="text-align:center;">
+14
+</td>
+<td style="text-align:center;">
+121
+</td>
+<td style="text-align:center;">
+0.004
+</td>
+<td style="text-align:center;">
+0.013 [0.001, 0.031]
+</td>
+<td style="text-align:center;">
+0.036
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Core
+</td>
+<td style="text-align:center;">
+14
+</td>
+<td style="text-align:center;">
+121
+</td>
+<td style="text-align:center;">
+0.069
+</td>
+<td style="text-align:center;">
+0.046 [0.012, 0.096]
+</td>
+<td style="text-align:center;">
+0.010
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Edema
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+90
+</td>
+<td style="text-align:center;">
+0.018
+</td>
+<td style="text-align:center;">
+0.026 [-0.008, 0.061]
+</td>
+<td style="text-align:center;">
+0.131
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Disconnection
+</td>
+<td style="text-align:center;">
+13
+</td>
+<td style="text-align:center;">
+129
+</td>
+<td style="text-align:center;">
+0.006
+</td>
+<td style="text-align:center;">
+0.096 [0.038, 0.148]
+</td>
+<td style="text-align:center;">
+0.003
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="conclusions" class="section level1">
+<h1>Conclusions</h1>
+<ul>
+<li>Contusions burden increased in PTE beyond injury severity - need for external validation</li>
+<li>White matter disconnected by contusions represents strong candidate biomarker</li>
+<li>Contusion-disconnected white matter may carry PTE relevant signal beyond focal injury burden</li>
+</ul>
+</div>
+<div id="results-1" class="section level1 mybreak span">
+<h1>Results</h1>
+<p><img src="IC_PTE_Poster_files/figure-html/cosine-panels-1.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+</div>
+
+</div>
+
+
+
+</body>
+</html>

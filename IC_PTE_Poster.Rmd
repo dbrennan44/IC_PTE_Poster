@@ -1,0 +1,315 @@
+---
+title: "Spatial Distribution of Traumatic Brain Injury Contusions<br>and Post-Traumatic Epilepsy"
+author:
+  - name: Daniel Brennan PhD
+    affil: 1
+  - name: Andrea L.C. Schneider MD PhD
+    affil: 1
+  - name: James J. Gugger MD PharmD
+    affil: 2
+
+affiliation:
+  - num: 1
+    address: University of Pennsylvania Department of Neurology, Philadelphia PA, United States
+  - num: 2
+    address: University of Rochester Department of Neurology, Rochester NY, United States
+
+affiliation_textsize: 25
+column_numbers: 3
+
+primary_colour: "#011F5B"
+secondary_colour: "#FFFFFF"
+main_textcol: "#FFFFFF"
+body_textcol: "#000000"
+affiliation_textcol: "#FFFFFF"
+title_height_ratio: 0.175
+
+output:
+  posterdown::posterdown_html:
+    self_contained: false
+bibliography: packages.bib
+---
+
+```{r setup, include=FALSE}
+suppressMessages(library(ggplot2))
+suppressMessages(library(dplyr))
+suppressMessages(library(readr))
+suppressMessages(library(patchwork))
+suppressMessages(library(knitr))
+suppressMessages(library(png))
+
+knitr::opts_chunk$set(
+  echo = FALSE,
+  warning = FALSE,
+  message = FALSE,
+  fig.align = "center",
+  out.width = "100%"
+)
+
+poster_dir <- dirname(normalizePath(knitr::current_input(), mustWork = TRUE))
+
+pte_cols <- c("non-PTE" = "#1f77b4", "PTE" = "#d62728")
+panel_title_map <- c(
+  "core + edema" = "Core + Edema",
+  "core" = "Core",
+  "edema" = "Edema",
+  "disconnection mapping" = "White Matter Disconnection"
+)
+
+glass_stat_file_map <- c(
+  "core + edema" = "glass_stat_both_5_epi.png",
+  "core" = "glass_stat_core_5_epi.png",
+  "edema" = "glass_stat_edema_5_epi.png",
+  "disconnection mapping" = "glass_stat_disconnectome_5_epi.png"
+)
+
+plot_cosine_panel <- function(df, panel_title, show_x_axis = TRUE) {
+  p <- ggplot(df, aes(x = pte_status, y = residualized_cosine, color = pte_status)) +
+    geom_boxplot(outlier.shape = NA, width = 0.55, alpha = 0.20, linewidth = 1.3) +
+    geom_jitter(width = 0.10, alpha = 0.8, size = 3.0) +
+    scale_color_manual(values = pte_cols, drop = FALSE) +
+    labs(
+      title = panel_title,
+      x = "PTE Status",
+      y = "Residualized Cosine Similarity"
+    ) +
+    theme_minimal(base_size = 22) +
+    theme(
+      legend.position = "none",
+      plot.title = element_text(size = 25, face = "bold", hjust = 0.5),
+      axis.title.x = element_text(size = 19),
+      axis.title.y = element_text(size = 19),
+      axis.text = element_text(size = 17),
+      panel.grid.minor = element_blank(),
+      panel.grid.major.x = element_blank(),
+      plot.margin = margin(12, 5, 12, 5)
+    )
+
+  if (!show_x_axis) {
+    p <- p +
+      theme(
+        axis.title.x = element_blank(),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank()
+      )
+  }
+
+  p
+}
+
+missing_cosine_panel <- function(panel_title, note) {
+  ggplot() +
+    annotate("text", x = 0.5, y = 0.62, label = panel_title, size = 7, fontface = "bold") +
+    annotate("text", x = 0.5, y = 0.40, label = note, size = 5) +
+    coord_cartesian(xlim = c(0, 1), ylim = c(0, 1), expand = FALSE) +
+    theme_void()
+}
+
+plot_glass_panel <- function(image_path) {
+  img <- png::readPNG(image_path)
+
+  ggplot() +
+    annotation_custom(
+      grid::rasterGrob(img, interpolate = TRUE),
+      xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf
+    ) +
+    coord_cartesian(xlim = c(0, 1), ylim = c(0, 1), expand = FALSE, clip = "off") +
+    theme_void() +
+    theme(
+      plot.background = element_rect(fill = "white", color = NA),
+      plot.margin = margin(12, 12, 12, 5)
+    )
+}
+
+missing_glass_panel <- function(panel_title, note) {
+  ggplot() +
+    annotate("text", x = 0.5, y = 0.58, label = panel_title, size = 7, fontface = "bold") +
+    annotate("text", x = 0.5, y = 0.40, label = note, size = 5) +
+    coord_cartesian(xlim = c(0, 1), ylim = c(0, 1), expand = FALSE) +
+    theme_void() +
+    theme(
+      plot.background = element_rect(fill = "white", color = "#cccccc", linewidth = 0.4),
+      plot.margin = margin(12, 12, 12, 5)
+    )
+}
+```
+
+<style>
+.poster_title h3 {
+  margin-top: 0.28em !important;
+}
+
+.poster_title h5 {
+  margin-top: 0.12em !important;
+}
+
+.poster_body ul {
+  margin-top: 0.35em;
+  margin-bottom: 0.45em;
+}
+
+.poster_body ul li {
+  margin-bottom: 0.28em;
+  line-height: 1.18;
+}
+
+.poster_body ul li:last-child {
+  margin-bottom: 0;
+}
+</style>
+
+# Background
+
+* Focal traumatic brain injury (TBI) and contusions are associated with post-traumatic epilepsy (PTE)
+* Observed differences confounded by increased injury severity
+* Unclear whether focal injury related beyond injury severity, which contusion characteristics (core/edema) associated
+
+Objective: To characterize the spatial distribution of TBI contusions in PTE
+
+# Methods
+
+* Transforming Research and Clinical Knowledge in TBI Epileptogenesis Project (TRACK-TBI EPI) data
+* Manual contusions segmentation on 2-week T1/FLAIR MRI; masks warped to MNI space
+* Disconnection mapping: extend contusion via intersection of normative white-matter tract atlas
+* LESYMAP: multivariate contusion map analysis
+* Cosine-similarity of stat-map & contusions compared with covariates: age, sex, GCS, total-contusion-volume
+
+# Results
+
+```{r demographics-table, results='asis'}
+demo_table_path <- file.path(poster_dir, "table1_demographics_poster.csv")
+
+if (!file.exists(demo_table_path)) {
+  cat("<p><em>Run my_lesymap.Rmd to export the demographics table.</em></p>")
+} else {
+  demo_table <- readr::read_csv(demo_table_path, show_col_types = FALSE)
+
+  cat("<div style='height:0.55em;'></div>")
+  cat("<div style='font-size:20pt; font-weight:700; margin-top:0.20em; margin-bottom:0.42em;'>Demographics</div>")
+
+  cat("
+<style>
+table.apa-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-top: 2px solid #000000;
+  border-bottom: 2px solid #000000;
+  font-size: 20pt;
+  line-height: 1.15;
+  margin-top: 0.15em;
+}
+table.apa-table th,
+table.apa-table td {
+  padding: 0.36em 0.48em;
+  border-left: none;
+  border-right: none;
+}
+table.apa-table thead th {
+  border-bottom: 1.5px solid #000000;
+  font-weight: 700;
+}
+table.apa-table tbody tr:last-child td {
+  border-bottom: none;
+}
+</style>
+")
+
+  apa_table <- knitr::kable(
+    demo_table,
+    format = "html",
+    escape = FALSE,
+    align = c("l", "c", "c", "c"),
+    table.attr = 'class="apa-table"'
+  )
+  cat(apa_table)
+}
+```
+
+```{r lesymap-results-table, results='asis'}
+results_table <- data.frame(
+  `Contusion Characteristic` = c(
+    "Core + Edema",
+    "Core",
+    "Edema",
+    "Disconnection"
+  ),
+  PTE = c("14", "14", "10", "13"),
+  `non-PTE` = c("121", "121", "90", "129"),
+  `LESYMAP p-value` = c("0.004", "0.069", "0.018", "0.006"),
+  `Median Difference<br>Cosine Similarity [95% CI]` = c(
+    "0.013 [0.001, 0.031]",
+    "0.046 [0.012, 0.096]",
+    "0.026 [-0.008, 0.061]",
+    "0.096 [0.038, 0.148]"
+  ),
+  `p-value` = c("0.036", "0.010", "0.131", "0.003"),
+  check.names = FALSE
+)
+
+cat("<div style='height:1.05em;'></div>")
+cat("<div style='font-size:20pt; font-weight:700; margin-top:0.18em; margin-bottom:0.42em;'>Contusion Mapping Results</div>")
+
+results_kable <- knitr::kable(
+  results_table,
+  format = "html",
+  escape = FALSE,
+  align = c("l", "c", "c", "c", "c", "c"),
+  table.attr = 'class=\"apa-table\"'
+)
+cat(results_kable)
+```
+
+# Conclusions
+
+* Contusions burden increased in PTE beyond injury severity - need for external validation
+* White matter disconnected by contusions represents strong candidate biomarker
+* Contusion-disconnected white matter may carry PTE relevant signal beyond focal injury burden
+
+# Results {.mybreak .span}
+
+```{r cosine-panels, fig.width=22, fig.height=20}
+cosine_data_path <- file.path(poster_dir, "poster_cosine_panels.csv")
+panel_levels <- c("core + edema", "core", "edema", "disconnection mapping")
+
+if (!file.exists(cosine_data_path)) {
+  panel_plots <- lapply(
+    panel_levels,
+    function(lbl) missing_cosine_panel(lbl, "Run my_lesymap.Rmd to export poster cosine data.")
+  )
+} else {
+  cosine_panel_df <- readr::read_csv(cosine_data_path, show_col_types = FALSE) |>
+    mutate(
+      pte_status = factor(pte_status, levels = c("non-PTE", "PTE")),
+      panel_label = factor(panel_label, levels = panel_levels)
+    )
+
+  panel_plots <- lapply(seq_along(panel_levels), function(i) {
+    panel_name <- panel_levels[[i]]
+    panel_df <- cosine_panel_df |>
+      filter(panel_label == panel_name, !is.na(residualized_cosine), !is.na(pte_status))
+
+    if (nrow(panel_df) == 0) {
+      missing_cosine_panel(panel_title_map[[panel_name]], "No exported rows for this panel.")
+    } else {
+      plot_cosine_panel(panel_df, panel_title_map[[panel_name]], show_x_axis = i == length(panel_levels))
+    }
+  })
+}
+
+glass_panels <- lapply(panel_levels, function(panel_name) {
+  image_path <- file.path(poster_dir, glass_stat_file_map[[panel_name]])
+
+  if (!file.exists(image_path)) {
+    missing_glass_panel(panel_title_map[[panel_name]], "Add corresponding glass-stat PNG to the poster folder.")
+  } else {
+    plot_glass_panel(image_path)
+  }
+})
+
+paired_rows <- lapply(seq_along(panel_levels), function(i) {
+  glass_panels[[i]] | panel_plots[[i]]
+})
+
+wrap_plots(paired_rows, ncol = 1) +
+  plot_layout(widths = c(2, 1))
+```

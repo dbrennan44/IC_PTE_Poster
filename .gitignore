@@ -1,0 +1,31 @@
+# macOS
+.DS_Store
+
+# R session and project state
+.Rhistory
+.RData
+.Ruserdata
+.Rproj.user/
+
+# R/R Markdown caches and intermediates
+*_cache/
+cache/
+*.utf8.md
+*.knit.md
+*.log
+*.aux
+*.out
+*.toc
+*.synctex.gz
+
+# Local environments and scratch files
+.venv/
+renv/library/
+scratch/
+tmp/
+
+# Keep rendered poster outputs and supporting assets tracked:
+# - IC_PTE_Poster.html
+# - IC_PTE_Poster.pdf
+# - IC_PTE_Poster_files/
+# - poster CSV and PNG inputs
