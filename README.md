@@ -1,11 +1,8 @@
 # IC PTE Poster
 
-[![Poster preview](IC_PTE_Poster_preview.png)](IC_PTE_Poster_preview.png)
+[![Poster preview](IC_PTE_Poster_preview.png)](IC_PTE_Poster_cropped.pdf)
 
-[Download the cropped poster PDF](IC_PTE_Poster_cropped.pdf?raw=1)
-
-GitHub's PDF preview may crop poster-sized pages. Use the image preview above
-or download the PDF directly.
+[Open the cropped poster PDF](IC_PTE_Poster_cropped.pdf)
 
 Source files and rendered outputs for the poster:
 
@@ -14,7 +11,7 @@ Source files and rendered outputs for the poster:
 ## Contents
 
 - `IC_PTE_Poster.Rmd`: main poster source.
-- `IC_PTE_Poster_preview.png`: README preview image.
+- `IC_PTE_Poster_preview.png`: README preview image linked to the PDF.
 - `IC_PTE_Poster.html`: rendered HTML poster.
 - `IC_PTE_Poster.pdf`: rendered PDF poster.
 - `IC_PTE_Poster_cropped.pdf`: cropped PDF used for the README preview.
