@@ -29,6 +29,7 @@ Install the R packages used by the poster:
 ```r
 install.packages(c(
   "posterdown",
+  "pagedown",
   "rmarkdown",
   "knitr",
   "ggplot2",
@@ -39,7 +40,7 @@ install.packages(c(
 ))
 ```
 
-Render from R:
+First knit/render the HTML from R:
 
 ```r
 rmarkdown::render("IC_PTE_Poster.Rmd")
@@ -49,6 +50,15 @@ Or from a shell:
 
 ```bash
 Rscript -e 'rmarkdown::render("IC_PTE_Poster.Rmd")'
+```
+
+Then generate the PDF from the rendered HTML:
+
+```r
+pagedown::chrome_print(
+  "~/IC_PTE_Poster/IC_PTE_Poster.html",
+  output = "~/IC_PTE_Poster/IC_PTE_Poster.pdf"
+)
 ```
 
 ## Notes
