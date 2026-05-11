@@ -1,4 +1,4 @@
-# IC PTE Poster
+# IC PTE Poster - made with code!
 
 [![Poster preview](IC_PTE_Poster_preview.png)](IC_PTE_Poster_cropped.pdf)
 
