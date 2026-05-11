@@ -1,8 +1,8 @@
 # IC PTE Poster
 
-[![Poster preview](IC_PTE_Poster_preview.png)](IC_PTE_Poster.pdf)
+[![Poster preview](IC_PTE_Poster_preview.png)](IC_PTE_Poster_cropped.pdf)
 
-[Open the poster PDF](IC_PTE_Poster.pdf)
+[Open the cropped poster PDF](IC_PTE_Poster_cropped.pdf)
 
 Source files and rendered outputs for the poster:
 
@@ -14,6 +14,7 @@ Source files and rendered outputs for the poster:
 - `IC_PTE_Poster_preview.png`: README preview image linked to the PDF.
 - `IC_PTE_Poster.html`: rendered HTML poster.
 - `IC_PTE_Poster.pdf`: rendered PDF poster.
+- `IC_PTE_Poster_cropped.pdf`: cropped PDF used for the README preview.
 - `IC_PTE_Poster_files/`: supporting HTML figure files.
 - `packages.bib`: bibliography generated for the poster.
 - `table1_demographics_poster.csv`: demographics table used in the poster.
